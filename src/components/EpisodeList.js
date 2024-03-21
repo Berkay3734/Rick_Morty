@@ -5,6 +5,7 @@ import {
   FlatList,
   ActivityIndicator,
   TouchableOpacity,
+  TextInput,
 } from 'react-native';
 import {fetchEpisodes} from '../services/api';
 import {useNavigation} from '@react-navigation/native';
@@ -12,7 +13,9 @@ import {useNavigation} from '@react-navigation/native';
 const EpisodeList = () => {
   const [episodes, setEpisodes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
   const navigation = useNavigation();
+  const [filteredEpisodes, setFilteredEpisodes] = useState([]);
 
   useEffect(() => {
     const fetchEpisodesData = async () => {
@@ -28,6 +31,16 @@ const EpisodeList = () => {
 
     fetchEpisodesData();
   }, []);
+  useEffect(() => {
+    const filtered = episodes.filter(
+      episode =>
+        episode.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        episode.episode.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        episode.air_date.toLowerCase().includes(searchQuery.toLowerCase()),
+    );
+
+    setFilteredEpisodes(filtered);
+  }, [searchQuery, episodes]);
 
   const renderItem = ({item}) => (
     <TouchableOpacity
@@ -36,7 +49,6 @@ const EpisodeList = () => {
         <Text>Name: {item.name}</Text>
         <Text>Episode: {item.episode}</Text>
         <Text>Air Date: {item.air_date}</Text>
-        <Text>URL: {item.url}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -51,8 +63,20 @@ const EpisodeList = () => {
 
   return (
     <View>
+      <TextInput
+        placeholder="Search episodes"
+        value={searchQuery}
+        onChangeText={setSearchQuery}
+        style={{
+          height: 40,
+          borderColor: 'gray',
+          borderWidth: 1,
+          margin: 10,
+          borderRadius: 5,
+        }}
+      />
       <FlatList
-        data={episodes}
+        data={filteredEpisodes}
         renderItem={renderItem}
         keyExtractor={item => item.id.toString()}
       />
