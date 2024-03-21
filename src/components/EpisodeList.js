@@ -31,7 +31,7 @@ const EpisodeList = () => {
 
   const renderItem = ({item}) => (
     <TouchableOpacity
-      onPress={() => navigation.navigate('EpisodeDetail', {url: item.url})}>
+      onPress={() => navigation.navigate('EpisodeDetails', {url: item.url})}>
       <View style={{padding: 10}}>
         <Text>Name: {item.name}</Text>
         <Text>Episode: {item.episode}</Text>

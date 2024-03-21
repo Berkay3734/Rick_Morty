@@ -1,22 +1,22 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
 import EpisodeList from './src/components/EpisodeList';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import EpisodeDetails from './src/components/EpisodeDetails';
+import CharacterInfo from './src/components/CharacterInfo';
+
+const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <EpisodeList />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="EpisodeList" component={EpisodeList} />
+        <Stack.Screen name="EpisodeDetails" component={EpisodeDetails} />
+        <Stack.Screen name="CharacterInfo" component={CharacterInfo} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default App;
