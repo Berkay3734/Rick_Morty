@@ -4,6 +4,7 @@ import {Image, Text, TouchableOpacity, View} from 'react-native';
 import styles from './Character.style';
 import {useDispatch, useSelector} from 'react-redux';
 import {addFavoriteCharacter} from '../../store/reducer';
+import Favorite from '../Favorite/Favorite';
 
 function Character({url}) {
   const [characterData, setCharacterData] = useState(null);
@@ -37,12 +38,8 @@ function Character({url}) {
           <Image source={{uri: characterData.image}} style={styles.imageSize} />
         </View>
         <View style={styles.text}>
-          <TouchableOpacity
-          // onPress={() => dispatch(addFavoriteCharacter(characterData))}
-          >
-            <Text>Favorilere Ekle</Text>
-          </TouchableOpacity>
-          <Text>Name: {characterData.name}</Text>
+          <Favorite />
+          <Text style={styles.charactersText}>{characterData.name}</Text>
         </View>
       </TouchableOpacity>
     </View>

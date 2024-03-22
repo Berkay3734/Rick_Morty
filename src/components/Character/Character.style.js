@@ -5,6 +5,9 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     marginVertical: 10,
+    backgroundColor: '#80b8f2',
+    borderRadius: 20,
+    alignSelf: 'center',
   },
   image: {
     flex: 1,
@@ -12,8 +15,10 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   imageSize: {
-    width: 200,
+    width: '100%',
     height: 220,
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 20,
   },
   text: {
     flex: 1,
@@ -22,9 +27,12 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   characters: {
-    flex: 1,
+    flex: 0.9,
     flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: '#d3d3d3',
+  },
+  charactersText: {
+    fontSize: 18,
+    color: 'white',
+    fontWeight: 'bold',
   },
 });

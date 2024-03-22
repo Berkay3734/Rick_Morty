@@ -46,10 +46,10 @@ const EpisodeList = () => {
   const renderItem = ({item}) => (
     <TouchableOpacity
       onPress={() => navigation.navigate('EpisodeDetails', {url: item.url})}>
-      <View style={{padding: 10}}>
-        <Text>Name: {item.name}</Text>
-        <Text>Episode: {item.episode}</Text>
-        <Text>Air Date: {item.air_date}</Text>
+      <View style={styles.episodeCard}>
+        <Text style={styles.text}>Name: {item.name}</Text>
+        <Text style={styles.text}>Episode: {item.episode}</Text>
+        <Text style={styles.text}>Air Date: {item.air_date}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -63,7 +63,7 @@ const EpisodeList = () => {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <TextInput
         placeholder="Search episodes"
         value={searchQuery}

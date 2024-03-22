@@ -66,18 +66,22 @@ const EpisodeDetails = ({route}) => {
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <Text>Name: {episodeData.name}</Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>Name: {episodeData.name}</Text>
+      <Text style={styles.text}>Episode: {episodeData.episode}</Text>
+      <Text style={styles.text}>Air Date: {episodeData.air_date}</Text>
       <TextInput
         placeholder="Search characters by name"
         value={searchQuery}
         onChangeText={setSearchQuery}
         style={styles.searchInput}
       />
-      {filteredCharacters.map((character, index) => (
-        <Character key={index} url={character.url} />
-      ))}
-    </ScrollView>
+      <ScrollView style={styles.container}>
+        {filteredCharacters.map((character, index) => (
+          <Character key={index} url={character.url} />
+        ))}
+      </ScrollView>
+    </View>
   );
 };
 
