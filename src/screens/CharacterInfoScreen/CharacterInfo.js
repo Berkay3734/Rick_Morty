@@ -1,14 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {Image, Text, View} from 'react-native';
+import styles from './CharacterInfo.style';
 
 const CharacterInfo = ({route, navigation}) => {
   const {characterData} = route.params;
   return (
     <View style={styles.container}>
-      <Image
-        source={{uri: characterData.image}}
-        style={{width: '100%', height: 500}}
-      />
+      <Image source={{uri: characterData.image}} style={styles.image} />
       <View style={styles.text}>
         <Text>Id: {characterData.id}</Text>
         <Text>Name: {characterData.name}</Text>
@@ -27,19 +25,3 @@ const CharacterInfo = ({route, navigation}) => {
 };
 
 export default CharacterInfo;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  image: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    flex: 1,
-    padding: 10,
-    justifyContent: 'center',
-  },
-});

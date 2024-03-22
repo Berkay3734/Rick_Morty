@@ -1,19 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
   ActivityIndicator,
   ScrollView,
+  Text,
   TextInput,
+  View,
 } from 'react-native';
-import Character from './Character';
+import Character from '../../components/Character/Character';
+import styles from './EpisodeDetails.style';
 
 const EpisodeDetails = ({route}) => {
   const {url} = route.params;
   const [episodeData, setEpisodeData] = useState(null);
   const [loading, setLoading] = useState(true);
-  // Tüm karakterlerin saklandığı yeni bir durum değişkeni eklendi.
   const [allCharacters, setAllCharacters] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredCharacters, setFilteredCharacters] = useState([]);
@@ -36,8 +35,8 @@ const EpisodeDetails = ({route}) => {
         const data = await response.json();
         const characters = await fetchCharacterDetails(data.characters);
         setEpisodeData(data);
-        setAllCharacters(characters); // Tüm karakterler burada saklanıyor.
-        setFilteredCharacters(characters); // Başlangıçta tüm karakterler gösteriliyor.
+        setAllCharacters(characters);
+        setFilteredCharacters(characters);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching episode details:', error);
@@ -53,7 +52,7 @@ const EpisodeDetails = ({route}) => {
       ? allCharacters.filter(character =>
           character.name.toLowerCase().includes(searchQuery.toLowerCase()),
         )
-      : allCharacters; // Filtreleme, orijinal tüm karakter listesi üzerinden yapılıyor.
+      : allCharacters;
 
     setFilteredCharacters(filtered);
   }, [searchQuery, allCharacters]);
@@ -81,19 +80,5 @@ const EpisodeDetails = ({route}) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  searchInput: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    paddingLeft: 10,
-    margin: 10,
-    borderRadius: 5,
-  },
-});
 
 export default EpisodeDetails;

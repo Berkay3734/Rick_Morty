@@ -1,10 +1,16 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
+import styles from './Character.style';
+import {useDispatch, useSelector} from 'react-redux';
+import {addFavoriteCharacter} from '../../store/reducer';
 
 function Character({url}) {
   const [characterData, setCharacterData] = useState(null);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const favoriteCharacter = useSelector(state => state.favoriteCharacter);
+  console.log('as', favoriteCharacter);
 
   useEffect(() => {
     async function fetchData() {
@@ -22,21 +28,18 @@ function Character({url}) {
 
   if (!characterData) return <Text>Loading...</Text>;
 
-  console.log(characterData);
-
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.characters}
         onPress={() => navigation.navigate('CharacterInfo', {characterData})}>
         <View style={styles.image}>
-          <Image
-            source={{uri: characterData.image}}
-            style={{width: 200, height: 220}}
-          />
+          <Image source={{uri: characterData.image}} style={styles.imageSize} />
         </View>
         <View style={styles.text}>
-          <TouchableOpacity onPress={() => console.log('favorilere eklendi')}>
+          <TouchableOpacity
+          // onPress={() => dispatch(addFavoriteCharacter(characterData))}
+          >
             <Text>Favorilere Ekle</Text>
           </TouchableOpacity>
           <Text>Name: {characterData.name}</Text>
@@ -47,28 +50,3 @@ function Character({url}) {
 }
 
 export default Character;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    marginVertical: 10,
-  },
-  image: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    flex: 1,
-    padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  characters: {
-    flex: 1,
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: '#d3d3d3',
-  },
-});

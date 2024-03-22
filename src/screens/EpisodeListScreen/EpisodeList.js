@@ -7,8 +7,9 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import {fetchEpisodes} from '../services/api';
+import {fetchEpisodes} from '../../services/api';
 import {useNavigation} from '@react-navigation/native';
+import styles from './EpisodeList.style';
 
 const EpisodeList = () => {
   const [episodes, setEpisodes] = useState([]);
@@ -67,13 +68,7 @@ const EpisodeList = () => {
         placeholder="Search episodes"
         value={searchQuery}
         onChangeText={setSearchQuery}
-        style={{
-          height: 40,
-          borderColor: 'gray',
-          borderWidth: 1,
-          margin: 10,
-          borderRadius: 5,
-        }}
+        style={styles.search}
       />
       <FlatList
         data={filteredEpisodes}
