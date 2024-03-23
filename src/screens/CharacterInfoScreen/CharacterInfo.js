@@ -1,32 +1,35 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
-import styles from './CharacterInfo.style';
+import {Image, View} from 'react-native';
 import BackButton from '../../components/BackButton/BackButton';
+import CharacterDetailTexts from '../../components/CharacterDetailText/CharacterDetailTexts';
 import Favorite from '../../components/Favorite/Favorite';
+import styles from './CharacterInfo.style';
 
-const CharacterInfo = ({route, navigation}) => {
-  const {characterData} = route.params;
+const CharacterInfo = ({route}) => {
+  const {id, name, status, species, type, gender, origin, created, url, image} =
+    route.params.characterData;
+  console.log(route.params.characterData);
+
   return (
     <View style={styles.container}>
       <BackButton />
-      <Favorite data={characterData} />
-      <Image source={{uri: characterData.image}} style={styles.image} />
+      <Favorite data={route.params.characterData} />
+      <Image source={{uri: image}} style={styles.image} />
       <View style={styles.textContainer}>
-        <Text style={styles.text}>Id: {characterData.id}</Text>
-        <Text style={styles.text}>Name: {characterData.name}</Text>
-        <Text style={styles.text}>Status: {characterData.status}</Text>
-        <Text style={styles.text}>Species: {characterData.species}</Text>
-        <Text style={styles.text}>Type: {characterData.type}</Text>
-        <Text style={styles.text}>Gender: {characterData.gender}</Text>
-        <Text style={styles.text}>
-          Origin Name: {characterData.origin.name}
-        </Text>
-        <Text style={styles.text}>
-          Origin Location: {characterData.origin.location}
-        </Text>
-        <Text style={styles.text}>Origin Url: {characterData.origin.url}</Text>
-        <Text style={styles.text}>Created: {characterData.created}</Text>
-        <Text style={styles.text}>Url: {characterData.url}</Text>
+        <CharacterDetailTexts label="Id" value={id} />
+        <CharacterDetailTexts label="Name" value={name} />
+        <CharacterDetailTexts label="Status" value={status} />
+        <CharacterDetailTexts label="Species" value={species} />
+        <CharacterDetailTexts label="Type" value={type ?? 'N/A'} />
+        <CharacterDetailTexts label="Gender" value={gender} />
+        <CharacterDetailTexts label="Origin Name" value={origin?.name} />
+        <CharacterDetailTexts
+          label="Origin Location"
+          value={origin?.location}
+        />
+        <CharacterDetailTexts label="Origin Url" value={origin?.url ?? 'N/A'} />
+        <CharacterDetailTexts label="Created" value={created} />
+        <CharacterDetailTexts label="Url" value={url} />
       </View>
     </View>
   );

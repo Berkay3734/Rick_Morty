@@ -4,9 +4,11 @@ import styles from './Favorite.style';
 import {useDispatch, useSelector} from 'react-redux';
 import {addFavoriteCharacter} from '../../store/reducer';
 import Notification from '../../services/Notification';
+import {useToast} from 'react-native-toast-notifications';
 
 function Favorite({data}) {
   const [favorite, setFavorite] = useState(false);
+  const toast = useToast();
   const favoriteCharacters = useSelector(
     state => state.user.favoriteCharacters,
   );
@@ -40,6 +42,16 @@ function Favorite({data}) {
     } else {
       if (favoriteCharacters.length >= 10) {
         Notification();
+        toast.show(
+          'Favori karakter ekleme sayısını aştınız. Başka bir karakteri favorilerden çıkarmalısınız',
+          {
+            type: 'danger',
+            placement: 'top',
+            duration: 4000,
+            offset: 30,
+            animationType: 'slide-in',
+          },
+        );
         return;
       }
       const updatedCharacters = [...favoriteCharacters, data.url];

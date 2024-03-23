@@ -8,6 +8,7 @@ import CharacterInfo from './src/screens/CharacterInfoScreen/CharacterInfo';
 import DataProvider from './src/store/DataProvider';
 import FavoriteCharacters from './src/screens/FavoriteCharactersScreen/FavoriteCharacters';
 import {Image} from 'react-native';
+import {ToastProvider} from 'react-native-toast-notifications';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -38,34 +39,36 @@ const App = () => {
   return (
     <DataProvider>
       <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen
-            name="Episodes"
-            component={EpisodesStack}
-            options={{
-              headerShown: false,
-              tabBarIcon: () => (
-                <Image
-                  source={require('./src/images/home.png')}
-                  style={{width: 30, height: 30}}
-                />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="FavoriteCharacters"
-            component={FavoriteCharacters}
-            options={{
-              headerShown: false,
-              tabBarIcon: () => (
-                <Image
-                  source={require('./src/images/favourites.png')}
-                  style={{width: 30, height: 30}}
-                />
-              ),
-            }}
-          />
-        </Tab.Navigator>
+        <ToastProvider>
+          <Tab.Navigator>
+            <Tab.Screen
+              name="Episodes"
+              component={EpisodesStack}
+              options={{
+                headerShown: false,
+                tabBarIcon: () => (
+                  <Image
+                    source={require('./src/images/home.png')}
+                    style={{width: 30, height: 30}}
+                  />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="FavoriteCharacters"
+              component={FavoriteCharacters}
+              options={{
+                headerShown: false,
+                tabBarIcon: () => (
+                  <Image
+                    source={require('./src/images/favourites.png')}
+                    style={{width: 30, height: 30}}
+                  />
+                ),
+              }}
+            />
+          </Tab.Navigator>
+        </ToastProvider>
       </NavigationContainer>
     </DataProvider>
   );
