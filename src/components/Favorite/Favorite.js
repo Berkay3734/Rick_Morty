@@ -3,14 +3,15 @@ import {Alert, Image, TouchableOpacity, View} from 'react-native';
 import styles from './Favorite.style';
 import {useDispatch, useSelector} from 'react-redux';
 import {addFavoriteCharacter} from '../../store/reducer';
+import Notification from '../../services/Notification';
 
 function Favorite({data}) {
   const [favorite, setFavorite] = useState(false);
   const favoriteCharacters = useSelector(
     state => state.user.favoriteCharacters,
   );
-  console.log(favoriteCharacters, data.url);
   const dispatch = useDispatch();
+
   const handleFavorite = () => {
     setFavorite(!favorite);
     if (favoriteCharacters.includes(data.url)) {
@@ -38,7 +39,7 @@ function Favorite({data}) {
       );
     } else {
       if (favoriteCharacters.length >= 10) {
-        alert('You can only have 10 favorite characters');
+        Notification();
         return;
       }
       const updatedCharacters = [...favoriteCharacters, data.url];

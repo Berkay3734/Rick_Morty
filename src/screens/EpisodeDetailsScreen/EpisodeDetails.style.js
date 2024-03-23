@@ -18,4 +18,9 @@ export default StyleSheet.create({
     padding: 10,
     color: '#fff',
   },
+  info: {
+    width: '100%',
+    marginTop: 70,
+    borderRadius: 5,
+  },
 });

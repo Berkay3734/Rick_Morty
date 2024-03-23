@@ -3,6 +3,7 @@ import {Text, View, ScrollView} from 'react-native';
 import styles from './FavoriteCharacters.style';
 import {useSelector} from 'react-redux';
 import Character from '../../components/Character/Character';
+import BackButton from '../../components/BackButton/BackButton';
 
 const FavoriteCharacters = () => {
   const favoriteCharacters = useSelector(
@@ -10,6 +11,7 @@ const FavoriteCharacters = () => {
   );
   return (
     <View style={styles.container}>
+      <BackButton />
       <Text style={styles.title}>Favorite Characters</Text>
       <ScrollView style={styles.container}>
         {favoriteCharacters ? (

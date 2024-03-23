@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import Character from '../../components/Character/Character';
 import styles from './EpisodeDetails.style';
+import BackButton from '../../components/BackButton/BackButton';
 
 const EpisodeDetails = ({route}) => {
   const {url} = route.params;
@@ -67,9 +68,12 @@ const EpisodeDetails = ({route}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Name: {episodeData.name}</Text>
-      <Text style={styles.text}>Episode: {episodeData.episode}</Text>
-      <Text style={styles.text}>Air Date: {episodeData.air_date}</Text>
+      <BackButton />
+      <View style={styles.info}>
+        <Text style={styles.text}>Name: {episodeData.name}</Text>
+        <Text style={styles.text}>Episode: {episodeData.episode}</Text>
+        <Text style={styles.text}>Air Date: {episodeData.air_date}</Text>
+      </View>
       <TextInput
         placeholder="Search characters by name"
         value={searchQuery}
