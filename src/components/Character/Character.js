@@ -2,16 +2,11 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import styles from './Character.style';
-import {useDispatch, useSelector} from 'react-redux';
-import {addFavoriteCharacter} from '../../store/reducer';
 import Favorite from '../Favorite/Favorite';
 
 function Character({url}) {
   const [characterData, setCharacterData] = useState(null);
   const navigation = useNavigation();
-  const dispatch = useDispatch();
-  const favoriteCharacter = useSelector(state => state.favoriteCharacter);
-  console.log('as', favoriteCharacter);
 
   useEffect(() => {
     async function fetchData() {
@@ -38,7 +33,7 @@ function Character({url}) {
           <Image source={{uri: characterData.image}} style={styles.imageSize} />
         </View>
         <View style={styles.text}>
-          <Favorite />
+          <Favorite data={characterData} />
           <Text style={styles.charactersText}>{characterData.name}</Text>
         </View>
       </TouchableOpacity>

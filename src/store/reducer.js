@@ -6,16 +6,11 @@ const userSlice = createSlice({
     favoriteCharacters: [],
   },
   reducers: {
-    toggleFavoriteCharacter: (state, action) => {
-      const index = state.favoriteCharacters.indexOf(action.payload);
-      if (index >= 0) {
-        state.favoriteCharacters.splice(index, 1);
-      } else {
-        state.favoriteCharacters.push(action.payload);
-      }
+    addFavoriteCharacter(state, action) {
+      state.favoriteCharacters = action.payload;
     },
   },
 });
-export const {toggleFavoriteCharacter} = userSlice.actions;
+export const {addFavoriteCharacter} = userSlice.actions;
 
 export default userSlice.reducer;
